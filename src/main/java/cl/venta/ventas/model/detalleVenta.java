@@ -1,28 +1,37 @@
 package cl.venta.ventas.model;
-
+import cl.venta.ventas.model.claves.DetalleVentaId;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "detalleVenta")
+@Table(name = "detalle_venta")
 
-public class detalleVenta {
+public class DetalleVenta {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EmbeddedId
+    private DetalleVentaId id;
 
-    private int cantidad;
-    private int precio;
-    private int numeroVenta;
-    private Producto idProd;
+    private Integer cantidad;
+    private Integer precio;
+
+    @ManyToOne
+    @MapsId("numeroVenta")
+    @JoinColumn(name = "numero_venta", insertable = false, updatable = false)
+    private Venta venta;
+    
 
 }
+
+
+

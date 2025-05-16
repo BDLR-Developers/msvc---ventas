@@ -1,35 +1,36 @@
 package cl.venta.ventas.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "venta")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 
 public class Venta {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private int nroVenta;
-    private Date fecha_venta;
+    private Integer numeroVenta;
+    private LocalDate fechaVenta;
     private String correoCliente;
-    private String estadoVenta;
-    private String idSucursal;
-    private String idUsuario;
-    private String idBodega;
-    private String idSucursal_1;
+    private Integer estadoVenta;
+    private Integer idBodega;
+    private Integer idUsuario;
 
-
+    @OneToMany(mappedBy = "venta")
+    private List<DetalleVenta> productos;
 }

@@ -1,9 +1,10 @@
 package cl.venta.ventas.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
+import cl.venta.ventas.model.Venta;
 
-public class ventaRepository {
+public interface VentaRepository extends CrudRepository<Venta,Integer> {
+
 
 }

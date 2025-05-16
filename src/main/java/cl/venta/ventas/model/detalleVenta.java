@@ -27,7 +27,7 @@ public class DetalleVenta {
 
     @ManyToOne
     @MapsId("numeroVenta")
-    @JoinColumn(name = "numero_venta", insertable = false, updatable = false)
+    @JoinColumn(name = "numero_venta")
     private Venta venta;
     
 

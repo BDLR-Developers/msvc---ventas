@@ -27,7 +27,7 @@ public class VentaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerDetalleVenta(@PathVariable Integer id) {
-        List<DetalleVentaInterface> productoOptional = service.obtenerDetallePorNumeroVenta(id);
+        List<DetalleVentaInterface> productoOptional = vService.obtenerDetallePorNumeroVenta(id);
         if(productoOptional.size() > 0) {
             return ResponseEntity.ok(productoOptional);
         }
@@ -38,9 +38,6 @@ public class VentaController {
     @PostMapping
     public ResponseEntity<?> crearVenta(@RequestBody DtoVentaPost postVenta) {
         service.crearVentaConDetalles(postVenta);
-
-        //TODO: process POST request
-        
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     

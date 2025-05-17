@@ -12,6 +12,7 @@ import cl.venta.ventas.model.claves.DetalleVentaId;
 import cl.venta.ventas.model.dto.DtoVentaPost;
 import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
 import cl.venta.ventas.repository.DetalleVentaRepository;
+import cl.venta.ventas.repository.VentaRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -19,6 +20,9 @@ public class VentaService {
 
     @Autowired
     private DetalleVentaRepository repository;
+
+
+    private VentaRepository vrepository;
 
     public List<DetalleVentaInterface> obtenerDetallePorNumeroVenta(Integer numeroVenta){
         return repository.obtenerDetallePorNumeroVenta(numeroVenta);
@@ -34,13 +38,13 @@ public class VentaService {
         venta.setIdBodega(postVenta.getIdBodega());
         venta.setIdUsuario(postVenta.getIdUsuario());
 
-        repository.save(venta);
+        vrepository.save(venta);
 
-        for (dto.VentaPost.detalleRequestVenta det : postVenta.getDetalles()) {
+        for (DtoVentaPost.DetalleRequestVenta det : postVenta.getDetalles()) {
 
             DetalleVenta detalle = new DetalleVenta();
             DetalleVentaId  id = new DetalleVentaId(venta.getNumeroVenta(), det.getIdProducto());
-            detalle.set(id);
+            detalle.setId(id);
             detalle.setCantidad(det.getCantidad());
             detalle.setPrecio(det.getPrecio());
             detalle.setVenta(venta);

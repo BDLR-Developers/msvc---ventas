@@ -21,7 +21,6 @@ import cl.venta.ventas.service.VentaService;
 @RequestMapping("/api/v1/ventas")
 public class VentaController {
 
-
     @Autowired
     private VentaService vService;
 
@@ -37,9 +36,11 @@ public class VentaController {
 
     @PostMapping
     public ResponseEntity<?> crearVenta(@RequestBody DtoVentaPost postVenta) {
-        service.crearVentaConDetalles(postVenta);
+        vService.crearVentaConDetalles(postVenta);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
+
     
     
 

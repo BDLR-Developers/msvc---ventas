@@ -22,4 +22,4 @@ import lombok.NoArgsConstructor;
         private Integer idProducto;
     }
 
-}
+

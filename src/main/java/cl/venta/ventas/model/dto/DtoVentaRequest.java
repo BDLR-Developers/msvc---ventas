@@ -8,7 +8,7 @@ import lombok.Data;
 
 
 @Data
-public class DtoVentaPost {    
+public class DtoVentaRequest {    
         private LocalDate fechaVenta;
         private String correoCliente;
         private Integer estadoVenta;

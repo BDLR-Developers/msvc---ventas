@@ -1,5 +1,8 @@
 package cl.venta.ventas.controller;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cl.venta.ventas.model.dto.DtoVentaPost;
+import cl.venta.ventas.model.dto.DtoVentaRequest;
+import cl.venta.ventas.model.dto.DtoVentaResponse;
 import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
 import cl.venta.ventas.service.VentaService;
 
@@ -22,24 +26,47 @@ import cl.venta.ventas.service.VentaService;
 public class VentaController {
 
     @Autowired
-    private VentaService vService;
+    private VentaService service;
 
-    @GetMapping("/{id}")
+    @GetMapping("/detalle/{id}")
     public ResponseEntity<?> obtenerDetalleVenta(@PathVariable Integer id) {
-        List<DetalleVentaInterface> productoOptional = vService.obtenerDetallePorNumeroVenta(id);
-        if(productoOptional.size() > 0) {
-            return ResponseEntity.ok(productoOptional);
+        List<DetalleVentaInterface> ventasOptional = service.obtenerDetallePorNumeroVenta(id);
+        if(ventasOptional.size() > 0) {
+            return ResponseEntity.ok(ventasOptional);
         }
         return ResponseEntity.notFound().build();
     }
 
-
     @PostMapping
-    public ResponseEntity<?> crearVenta(@RequestBody DtoVentaPost postVenta) {
-        vService.crearVentaConDetalles(postVenta);
+    public ResponseEntity<?> crearVenta(@RequestBody DtoVentaRequest postVenta) {
+        service.crearVentaConDetalles(postVenta);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerVenta(@PathVariable Integer id) {
+        try{
+            DtoVentaResponse dto = service.obtenerVenta(id);
+            return ResponseEntity.ok(dto);
+        } catch(RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @GetMapping("/{fecha}")
+    public ResponseEntity<List<DtoVentaResponse>> obtenerVentasPorFecha(@PathVariable String fecha) {
+
+        try {
+            LocalDate fechaVenta = LocalDate.parse(fecha);
+            List<DtoVentaResponse> ventas = service.obtenerVentasPorFecha(fechaVenta);
+            return ResponseEntity.ok(ventas);
+            
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().build();
+        }}
+    }
+    
 
     
     

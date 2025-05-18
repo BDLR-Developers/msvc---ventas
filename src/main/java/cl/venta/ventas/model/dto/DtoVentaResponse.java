@@ -7,7 +7,7 @@ import cl.venta.ventas.model.dto.DtoVentaRequest.DetalleRequestVenta;
 import lombok.Data;
 
 @Data
-public class DtoResponse {
+public class DtoVentaResponse {
 
     private Integer numeroVenta;
     private LocalDate fechaVenta;

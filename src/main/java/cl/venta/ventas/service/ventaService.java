@@ -56,7 +56,7 @@ public class VentaService {
     }
 
     public DtoVentaResponse obtenerVenta(Integer numeroVenta) {
-        Venta venta = new repoVenta.findById(numeroVenta)
+        Venta venta = repoVenta.findById(numeroVenta)
         .orElseThrow(() -> new RuntimeException("Venta no encotnrada"));
 
         DtoVentaResponse dto = new DtoVentaResponse();
@@ -67,7 +67,7 @@ public class VentaService {
         dto.setIdUsuario(venta.getIdUsuario());
 
 
-        List<DtoVentaResponse.DetalleResponseVenta> detalles = venta.getProductos().stream().map(det -> {
+        List<DtoVentaResponse.DetalleResponseVenta> detalles = venta.getProductos().stream().map((DetalleVenta det) -> {
             DtoVentaResponse.DetalleResponseVenta d = new DtoVentaResponse.DetalleResponseVenta();
             d.setIdProducto(det.getId().getIdProducto());
             d.setCantidad(det.getCantidad());
@@ -104,6 +104,34 @@ public class VentaService {
             dto.setProductos(detalles);
             return dto;
         }).toList();
+    }
+
+
+    public DtoVentaResponse eliminarVenta(Integer numeroVenta) {
+        Venta venta = repoVenta.findById(numeroVenta)
+            .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
+
+        DtoVentaResponse dto = new DtoVentaResponse();
+        dto.setNumeroVenta(venta.getNumeroVenta());
+        dto.setFechaVenta(venta.getFechaVenta());
+        dto.setCorreoCliente(venta.getCorreoCliente());
+        dto.setIdBodega(venta.getIdBodega());
+        dto.setIdUsuario(venta.getIdUsuario());
+
+
+
+        List<DtoVentaResponse.DetalleResponseVenta> detalles = venta.getProductos().stream().map(det -> {
+            DtoVentaResponse.DetalleResponseVenta d = new DtoVentaResponse.DetalleResponseVenta();
+            d.setIdProducto(det.getId().getIdProducto());
+            d.setCantidad(det.getCantidad());
+            d.setPrecio(det.getPrecio());
+            return d;
+
+        }).toList();
+
+        dto.setProductos(detalles);
+        repoVenta.deleteById(numeroVenta);
+        return dto;
     }
 
 }

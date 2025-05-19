@@ -16,11 +16,11 @@ public class DtoVentaResponse {
     private Integer idUsuario;
     private List<DetalleResponseVenta> productos;
 
-}
-
 @Data
 public static class DetalleResponseVenta {
     private Integer idProducto;
     private Integer cantidad;
     private Integer precio;
+}
+
 }

@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.venta.ventas.model.dto.DtoVentaRequest;
 import cl.venta.ventas.model.dto.DtoVentaResponse;
-import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
+//import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
 import cl.venta.ventas.service.VentaService;
 
 
@@ -28,7 +29,7 @@ public class VentaController {
 
     @Autowired
     private VentaService service;
-
+    /* 
     @GetMapping("/detalle/{id}")
     public ResponseEntity<?> obtenerDetalleVenta(@PathVariable Integer id) {
         List<DetalleVentaInterface> ventasOptional = service.obtenerDetallePorNumeroVenta(id);
@@ -37,7 +38,7 @@ public class VentaController {
         }
         return ResponseEntity.notFound().build();
     }
-
+*/
     @PostMapping
     public ResponseEntity<?> crearVenta(@RequestBody DtoVentaRequest postVenta) {
         service.crearVentaConDetalles(postVenta);
@@ -55,8 +56,8 @@ public class VentaController {
         }
     }
     
-    @GetMapping("/{fecha}")
-    public ResponseEntity<List<DtoVentaResponse>> obtenerVentasPorFecha(@PathVariable String fecha) {
+    @GetMapping
+    public ResponseEntity<List<DtoVentaResponse>> obtenerVentasPorFecha(@RequestParam String fecha) {
 
         try {
             LocalDate fechaVenta = LocalDate.parse(fecha);

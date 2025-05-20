@@ -23,7 +23,7 @@ public class VentaService {
     @Autowired
     private DetalleVentaRepository repository;
 
-
+    @Autowired
     private VentaRepository repoVenta;
 
     public List<DetalleVentaInterface> obtenerDetallePorNumeroVenta(Integer numeroVenta){
@@ -67,7 +67,7 @@ public class VentaService {
         dto.setIdUsuario(venta.getIdUsuario());
 
 
-        List<DtoVentaResponse.DetalleResponseVenta> detalles = venta.getProductos().stream().map((DetalleVenta det) -> {
+        List<DtoVentaResponse.DetalleResponseVenta> detalles = venta.getProductos().stream().map((det) -> {
             DtoVentaResponse.DetalleResponseVenta d = new DtoVentaResponse.DetalleResponseVenta();
             d.setIdProducto(det.getId().getIdProducto());
             d.setCantidad(det.getCantidad());
@@ -81,7 +81,7 @@ public class VentaService {
 
 
     public List<DtoVentaResponse> obtenerVentasPorFecha(LocalDate fecha){
-        List<Venta> ventas = repoVenta.findByFecha(fecha);
+        List<Venta> ventas = repoVenta.findByFechaVenta(fecha);
 
         return ventas.stream().map(venta -> {
             DtoVentaResponse dto = new DtoVentaResponse();

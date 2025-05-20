@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import cl.venta.ventas.service.VentaService;
 @RestController
 @RequestMapping("/api/v1/ventas")
 public class VentaController {
+
+    private static final Logger logger = LoggerFactory.getLogger(VentaController.class);
 
     @Autowired
     private VentaService service;
@@ -65,6 +69,7 @@ public class VentaController {
             return ResponseEntity.ok(ventas);
             
         } catch (DateTimeParseException e) {
+            logger.error(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
@@ -76,6 +81,8 @@ public class VentaController {
             return ResponseEntity.ok(dto);
 
         } catch (RuntimeException ex) {
+
+
             return ResponseEntity.notFound().build();
         }}
     }

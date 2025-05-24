@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "detalle_venta")
 
-public class DetalleVenta {
+public class DetVenta {
 
     @EmbeddedId
     private DetalleVentaId id;

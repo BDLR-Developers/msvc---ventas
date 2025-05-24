@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import cl.venta.ventas.model.DetalleVenta;
+import cl.venta.ventas.model.DetVenta;
 import cl.venta.ventas.model.claves.DetalleVentaId;
 import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
 
 
 
 
-public interface DetalleVentaRepository extends CrudRepository<DetalleVenta, DetalleVentaId>{
+public interface DetVentaRepository extends CrudRepository<DetVenta, DetalleVentaId>{
     @Query(value = """
         SELECT
             dv.numero_venta AS numeroVenta,

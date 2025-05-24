@@ -21,17 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.venta.ventas.model.dto.DtoVentaRequest;
 import cl.venta.ventas.model.dto.DtoVentaResponse;
 //import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
-import cl.venta.ventas.service.VentaService;
+import cl.venta.ventas.service.VentService;
 
 
 @RestController
 @RequestMapping("/api/v1/ventas")
-public class VentaController {
+public class VenController {
 
-    private static final Logger logger = LoggerFactory.getLogger(VentaController.class);
+    private static final Logger logger = LoggerFactory.getLogger(VenController.class);
 
     @Autowired
-    private VentaService service;
+    private VentService service;
     /* 
     @GetMapping("/detalle/{id}")
     public ResponseEntity<?> obtenerDetalleVenta(@PathVariable Integer id) {

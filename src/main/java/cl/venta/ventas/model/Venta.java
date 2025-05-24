@@ -32,5 +32,5 @@ public class Venta {
     private Integer idUsuario;
 
     @OneToMany(mappedBy = "venta")
-    private List<DetalleVenta> productos;
+    private List<DetVenta> productos;
 }

@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import cl.venta.ventas.model.Venta;
 
-public interface VentaRepository extends CrudRepository<Venta,Integer> {
+public interface VentRepository extends CrudRepository<Venta,Integer> {
     List<Venta> findByFechaVenta(LocalDate fechaVenta);
 }
 

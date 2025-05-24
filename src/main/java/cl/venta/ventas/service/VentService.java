@@ -7,24 +7,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cl.venta.ventas.model.DetalleVenta;
+import cl.venta.ventas.model.DetVenta;
 import cl.venta.ventas.model.Venta;
 import cl.venta.ventas.model.claves.DetalleVentaId;
 import cl.venta.ventas.model.dto.DtoVentaRequest;
 import cl.venta.ventas.model.dto.DtoVentaResponse;
 import cl.venta.ventas.model.interfaces.DetalleVentaInterface;
-import cl.venta.ventas.repository.DetalleVentaRepository;
-import cl.venta.ventas.repository.VentaRepository;
+import cl.venta.ventas.repository.DetVentaRepository;
+import cl.venta.ventas.repository.VentRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class VentaService {
+public class VentService {
 
     @Autowired
-    private DetalleVentaRepository repository;
+    private DetVentaRepository repository;
 
     @Autowired
-    private VentaRepository repoVenta;
+    private VentRepository repoVenta;
 
     public List<DetalleVentaInterface> obtenerDetallePorNumeroVenta(Integer numeroVenta){
         return repository.obtenerDetallePorNumeroVenta(numeroVenta);
@@ -43,7 +43,7 @@ public class VentaService {
         repoVenta.save(venta);
 
         for (DtoVentaRequest.DetalleRequestVenta det : postVenta.getDetalles()) {
-            DetalleVenta detalle = new DetalleVenta();
+            DetVenta detalle = new DetVenta();
             DetalleVentaId  id = new DetalleVentaId(venta.getNumeroVenta(), det.getIdProducto());
             detalle.setId(id);
             detalle.setCantidad(det.getCantidad());

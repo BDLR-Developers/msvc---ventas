@@ -1,3 +1,4 @@
+
 package cl.venta.ventas.model;
 import cl.venta.ventas.model.claves.DetalleVentaId;
 import jakarta.persistence.EmbeddedId;
@@ -32,6 +33,3 @@ public class DetalleVenta {
     
 
 }
-
-
-

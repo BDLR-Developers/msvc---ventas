@@ -10,3 +10,4 @@ import cl.venta.ventas.model.Venta;
 public interface VentaRepository extends CrudRepository<Venta,Integer> {
     List<Venta> findByFechaVenta(LocalDate fechaVenta);
 }
+

@@ -1,6 +1,5 @@
 package cl.venta.ventas.controller;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -86,5 +85,3 @@ public class VentaController {
             return ResponseEntity.notFound().build();
         }}
     }
-
-

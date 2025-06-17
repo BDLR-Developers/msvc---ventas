@@ -1,6 +1,7 @@
 package cl.venta.ventas.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -32,5 +33,10 @@ public class Venta {
     private Integer idUsuario;
 
     @OneToMany(mappedBy = "venta")
-    private List<DetVenta> productos;
+    private List<DetVenta> productos = new ArrayList<>();
+
+    public void addProducto(DetVenta producto) {
+        productos.add(producto);
+        
+    }
 }
